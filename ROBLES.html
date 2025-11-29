@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Página Principal - José Luis Robles Abogados</title>
+
+  <style>
+    /* ====== RESET ====== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+      overflow-x: hidden;
+      background: #0f1a2b;
+    }
+
+    /* 🔹 Fondo */
+    .background {
+      position: fixed;
+      inset: 0;
+      background: url("Fondo.png") no-repeat center center fixed;
+      background-size: cover;
+      z-index: -1;
+      filter: brightness(0.85);
+    }
+
+    /* 🔹 Estructura general */
+    .main-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1.5fr;
+      align-items: center;
+      justify-items: center;
+      height: 100vh;
+      padding: 0 60px;
+      gap: 40px;
+    }
+
+    /* 🔹 Persona (lado izquierdo) */
+    .persona-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .persona-img {
+      width: 700px;
+      max-width: 150%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 20px;
+      filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
+      transition: transform 0.3s ease;
+    }
+
+    .persona-img:hover {
+      transform: scale(1.05);
+    }
+
+    /* 🔹 Centro (logo + botones) */
+    .center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      text-align: center;
+      transform: translate(-55px, 20px);
+    }
+
+    .logo {
+      width: 400px;
+      height: 450px;
+      border-radius: 50%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transform: translateY(-70px);
+    }
+
+    .logo img {
+      width: 300%;
+      height: 140%;
+      object-fit: cover;
+    }
+
+    .logo:hover {
+      transform: translateY(-70px) scale(1.05);
+    }
+
+    /* 🔹 Botones */
+    .buttons-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px 25px;
+      max-width: 460px;
+      transform: translateY(-110px);
+    }
+
+    .btn {
+      background: #4a3e0b;
+      color: #fff;
+      padding: 13px;
+      border-radius: 12px;
+      text-decoration: none;
+      text-align: center;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+      border: 1px solid #bfa43c;
+    }
+
+    .btn:hover {
+      background: #bfa43c;
+      color: #0f1a2b;
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    }
+
+    /* 🔹 Derecha (tarjetas) */
+    .right-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 25px;
+      justify-items: center;
+      align-items: center;
+      height: 90vh;
+      transform: translateY(10px);
+    }
+
+    .card {
+      width: 100%;
+      max-width: 390px;
+      border-radius: 25px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(191,164,60,0.5);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+      padding: 18px 22px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.4);
+    }
+
+    .card h3 {
+      font-size: 1.45rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, #ffd700, #bfa43c, #ffd700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      border-bottom: 2px solid rgba(191,164,60,0.6);
+      display: inline-block;
+      padding-bottom: 5px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+    }
+
+    .media-container {
+      width: 100%;
+      height: 150px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .media-container img,
+    .media-container video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .media-container:hover {
+      transform: scale(1.03);
+    }
+
+    .btn-card {
+      background: #4a3e0b;
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      width: fit-content;
+      margin: 5px auto 0;
+      transition: all 0.3s ease;
+      border: 1px solid #bfa43c;
+    }
+
+    .btn-card:hover {
+      background: #bfa43c;
+      color: #0f1a2b;
+      transform: translateY(-2px);
+    }
+
+    .card:nth-child(1) {
+      grid-column: 1 / span 2;
+      justify-self: center;
+      height: 250px;
+    }
+
+    .card:nth-child(2),
+    .card:nth-child(3) {
+      max-width: 420px;
+      height: 280px;
+    }
+
+    /* ===== RESPONSIVE ===== */
+
+    /* 🔸 Tablets */
+    @media (max-width: 1024px) {
+      .main-layout {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
+        height: auto;
+        padding: 40px;
+        gap: 30px;
+      }
+
+      .persona-container {
+        grid-column: 1 / span 2;
+        order: -1;
+      }
+
+      .persona-img {
+        width: 80%;
+        max-width: 500px;
+      }
+
+      .right-column {
+        grid-template-columns: 1fr 1fr;
+        height: auto;
+      }
+    }
+
+    /* 🔸 Celulares */
+    @media (max-width: 768px) {
+
+      /* ⛔ OCULTAR IMAGEN DE LA PERSONA */
+      .persona-container {
+        display: none;
+      }
+
+      body {
+        overflow-y: auto;
+      }
+
+      .main-layout {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        height: auto;
+        gap: 25px;
+      }
+
+      .center {
+        transform: none;
+        width: 100%;
+      }
+
+      /* 🔥 ARREGLO DEL SALTO DEL LOGO */
+      .logo {
+        width: 300px;
+        height: 300px;
+        transform: none !important;
+        transition: none !important;   /* ← elimina animación rara */
+      }
+
+      .logo img {
+        width: 220%;
+        height: 130%;
+      }
+
+      .buttons-grid {
+        grid-template-columns: 1fr;
+        transform: none;
+        gap: 10px;
+      }
+
+      .right-column {
+        grid-template-columns: 1fr;
+        width: 100%;
+        height: auto;
+      }
+
+      .card {
+        max-width: 360px;
+        height: auto;
+        margin: 10px auto;
+      }
+
+      .media-container {
+        height: 180px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="background"></div>
+
+  <div class="main-layout">
+    <div class="persona-container">
+      <img src="foto1.png" alt="Persona" class="persona-img" />
+    </div>
+
+    <div class="center">
+      <div class="logo">
+        <img src="logorobles.png" alt="Logo" />
+      </div>
+
+      <div class="buttons-grid">
+        <a href="../Quienes.php" class="btn">¿Quiénes Somos?</a>
+        <a href="principal2.html" class="btn">Servicios</a>
+        <a href="../index.php" class="btn">Artículos</a>
+        <a href="#" class="btn">Desde nuestra perspectiva</a>
+        <a href="#" class="btn">Audiencias</a>
+        <a href="#" class="btn">Variedades</a>
+      </div>
+    </div>
+
+    <div class="right-column"> 
+      
+      <div class="card">
+        <h3>Noticias</h3>
+        <div class="media-container">
+          <video controls>
+            <source src="NOTICIA.mp4" type="video/mp4" />
+            Tu navegador no soporta el video.
+          </video>
+        </div>
+        <a href="P.Principal.html" class="btn-card">Ver más</a>
+      </div> <div class="card">
+        <h3>Entrevistas</h3>
+        <div class="media-container video">
+          <video controls>
+            <source src="entrevista.mp4" type="video/mp4" />
+            Tu navegador no soporta el video.
+          </video>
+        </div>
+        <a href="#" class="btn-card">Ver más</a> </div> <div class="card">
+        <h3>Ponencias</h3>
+        <div class="media-container video">
+          <video controls>
+            <source src="videomp4.mp4" type="video/mp4" />
+            Tu navegador no soporta el video.
+          </video>
+        </div>
+        <a href="#" class="btn-card">Ponencias</a>
+      </div> </div> </div> </body>
+</html>
