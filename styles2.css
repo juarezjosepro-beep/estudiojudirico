@@ -1,0 +1,167 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* HEADER más grande */
+.pp-header {
+  background: #2c3e50;
+  color: #fff;
+  text-align: center;
+  padding: 4rem 1rem; /* más alto para imagen/banner */
+}
+
+.pp-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.pp-header p {
+  font-size: 1.2rem;
+}
+
+/* Contenedor principal */
+.pp-container {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+  gap: 30px;
+}
+
+/* --- Columna izquierda --- */
+.pp-col-izq {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* QUIÉNES SOMOS tarjeta */
+.quienes-somos-card {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.quienes-somos-card .pp-card {
+  max-width: 300px; /* más angosta */
+}
+
+.quienes-somos-card .pp-card img {
+  height: 280px; /* más alta */
+  object-fit: cover;
+}
+
+/* BOTONES */
+.pp-botones-grid {
+  display: flex;
+  gap: 40px;
+}
+
+.columna {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.pp-botones-grid button {
+  width: 180px;   /* más anchos */
+  padding: 1.2rem; /* más grandes */
+  background: #0077cc;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1.05rem;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.pp-botones-grid button:hover {
+  background: #005fa3;
+}
+
+/* --- Columna derecha (Noticias, Entrevistas, Ponencias) --- */
+.pp-col-der {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.pp-cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Tarjetas */
+.pp-card {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  max-width: 320px; /* más angostas */
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.pp-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.pp-card img {
+  width: 100%;
+  height: 260px; /* más largas */
+  object-fit: cover;
+  display: block;
+}
+
+/* Botón pegado abajo */
+.pp-card-btn {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 119, 204, 0.9);
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+  padding: 12px 0;
+  font-weight: bold;
+  transition: background 200ms ease;
+}
+
+.pp-card-btn:hover {
+  background: rgba(0, 95, 163, 0.95);
+}
+
+/* FOOTER */
+.pp-footer {
+  text-align: center;
+  padding: 20px;
+  background: #222;
+  color: white;
+  font-size: 0.9rem;
+}
+
+

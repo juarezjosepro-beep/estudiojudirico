@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Heladería - Pedidos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f5f7fb;
+      --card:#ffffff;
+      --accent:#6dd3b2;
+      --accent-dark:#4bb38f;
+      --text:#233043;
+      --muted:#7a8a97;
+      --glass: rgba(255,255,255,0.75);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: 'Poppins', sans-serif;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.6)),
+        url('https://images.unsplash.com/photo-1505250469679-203ad9ced0cb?auto=format&fit=crop&w=1600&q=60') center/cover fixed no-repeat;
+      background-color:var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      min-height:100vh;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      padding:40px 20px;
+    }
+    .app {
+      width:1100px;
+      max-width:100%;
+      backdrop-filter: blur(6px);
+      background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.9));
+      border-radius:16px;
+      box-shadow: 0 12px 30px rgba(20,30,60,0.12);
+      padding:28px;
+    }
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:18px;
+    }
+    .brand{
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .logo {
+      width:56px;
+      height:56px;
+      border-radius:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(135deg,var(--accent),var(--accent-dark));
+      color:#fff;
+      font-weight:700;
+      font-size:20px;
+      box-shadow: 0 6px 18px rgba(75,179,143,0.18);
+    }
+    h1{font-size:20px;margin:0}
+    p.lead{margin:0;color:var(--muted);font-size:13px}
+    .top-actions{
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .search{
+      padding:8px 12px;
+      border-radius:10px;
+      border:1px solid rgba(35,48,67,0.06);
+      background:transparent;
+      min-width:220px;
+    }
+    main{
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:20px;
+      align-items:start;
+    }
+    .products{
+      display:grid;
+      grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
+      gap:16px;
+    }
+    .card{
+      background:var(--card);
+      border-radius:12px;
+      padding:12px;
+      box-shadow: 0 6px 16px rgba(35,48,67,0.06);
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+    .card:hover{ transform: translateY(-6px); box-shadow: 0 16px 40px rgba(35,48,67,0.08); }
+    .thumb{
+      height:140px;
+      border-radius:10px;
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(180deg,#fff,#fbfbfb);
+    }
+    .thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+    .card h3{ margin:0; font-size:16px; }
+    .price-row{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
+    .price{ font-weight:600; color:var(--accent-dark); }
+    .add-btn{
+      border:0; padding:8px 10px; border-radius:8px;
+      background:var(--accent); color:#fff; cursor:pointer;
+      box-shadow: 0 6px 14px rgba(109,211,178,0.14);
+    }
+    .add-btn:active{ transform:scale(.99) }
+    aside.cart{
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.95));
+      border-radius:12px;
+      padding:14px;
+      border:1px solid rgba(35,48,67,0.04);
+      position:sticky;
+      top:24px;
+      height:fit-content;
+    }
+    .cart h2{margin:0 0 10px 0;font-size:16px}
+    .cart-list{ display:flex; flex-direction:column; gap:8px; max-height:360px; overflow:auto; padding-right:6px; }
+    .cart-item{
+      display:flex; gap:10px; align-items:center; justify-content:space-between;
+      padding:8px; border-radius:8px; background: rgba(35,48,67,0.02);
+    }
+    .qty{ display:flex; gap:6px; align-items:center; }
+    .qty button{ border:0; padding:6px 8px; border-radius:6px; cursor:pointer; background:#fff; box-shadow: 0 2px 6px rgba(20,30,60,0.04) }
+    .total-row{ display:flex; justify-content:space-between; margin-top:12px; font-weight:600; font-size:16px; }
+    .place-order{
+      width:100%;
+      margin-top:12px;
+      padding:10px;
+      background:var(--accent-dark);
+      color:#fff;
+      border-radius:10px;
+      border:0;
+      cursor:pointer;
+      font-weight:600;
+    }
+    @media (max-width:980px){
+      main{ grid-template-columns:1fr; }
+      aside.cart{ position: static; margin-top: 14px; }
+    }
+    .toast{
+      position:fixed;
+      right:20px;
+      bottom:20px;
+      background:var(--card);
+      padding:10px 14px;
+      border-radius:10px;
+      box-shadow: 0 12px 30px rgba(20,30,60,0.12);
+      display:none;
+    }
+    .modal-backdrop{
+      position:fixed; inset:0; background:rgba(10,20,30,0.45); display:none; align-items:center; justify-content:center; z-index:60;
+    }
+    .modal{
+      background:#fff; border-radius:12px; padding:18px; width:420px; max-width:92%;
+      box-shadow: 0 20px 50px rgba(20,30,60,0.25);
+    }
+    .modal h3{ margin-top:0 }
+    .muted{ color:var(--muted); font-size:13px }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="brand">
+        <div class="logo">H</div>
+        <div>
+          <h1>Heladería — Pedidos</h1>
+          <p class="lead">Elige tus sabores y pide desde tu mesa o celular</p>
+        </div>
+      </div>
+      <div class="top-actions">
+        <input class="search" id="search" placeholder="Buscar sabor (ej: vainilla)" />
+        <button class="add-btn" id="open-sample">Ver demo</button>
+      </div>
+    </header>
+    <main>
+      <section>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+          <h2 style="margin:0">Sabores disponibles</h2>
+          <p class="muted" id="count">6 productos</p>
+        </div>
+        <div class="products" id="products">
+          <article class="card" data-id="1" data-name="Vainilla Clásica" data-price="3.50">
+            <div class="thumb"><img src="https://images.unsplash.com/photo-1543168256-418811576a17?auto=format&fit=crop&w=800&q=60" alt=""></div>
+            <h3>Vainilla Clásica</h3>
+            <div class="price-row">
+              <div class="price">$3.50</div>
+              <button class="add-btn">Añadir</button>
+            </div>
+          </article>
+          <article class="card" data-id="2" data-name="Chocolate Intenso" data-price="4.00">
+            <div class="thumb"><img src="https://images.unsplash.com/photo-1589307000257-7c1b5f6b9b9b?auto=format&fit=crop&w=800&q=60" alt=""></div>
+            <h3>Chocolate Intenso</h3>
+            <div class="price-row">
+              <div class="price">$4.00</div>
+              <button class="add-btn">Añadir</button>
+            </div>
+          </article>
+          <article class="card" data-id="3" data-name="Fresa Natural" data-price="3.80">
+            <div class="thumb"><img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=60" alt=""></div>
+            <h3>Fresa Natural</h3>
+            <div class="price-row">
+              <div class="price">$3.80</div>
+              <button class="add-btn">Añadir</button>
+            </div>
+          </article>
+          <article class="card" data-id="4" data-name="Limon-refresh" data-price="3.20">
+            <div class="thumb"><img src="https://images.unsplash.com/photo-1478144592103-25e218a04891?auto=format&fit=crop&w=800&q=60" alt=""></div>
+            <h3>Limón Refresh</h3>
+            <div class="price-row">
+              <div class="price">$3.20</div>
+              <button class="add-btn">Añadir</button>
+            </div>
+          </article>
+          <article class="card" data-id="5" data-name="Dulce de Leche" data-price="4.20">
+            <div class="thumb"><img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=60" alt=""></div>
+            <h3>Dulce de Leche</h3>
+            <div class="price-row">
+              <div class="price">$4.20</div>
+              <button class="add-btn">Añadir</button>
+            </div>
+          </article>
+          <article class="card" data-id="6" data-name="Menta con Chips" data-price="3.90">
+            <div class="thumb"><img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=800&q=60" alt=""></div>
+            <h3>Menta con Chips</h3>
+            <div class="price-row">
+              <div class="price">$3.90</div>
+              <button class="add-btn">Añadir</button>
+            </div>
+          </article>
+        </div>
+      </section>
+      <aside class="cart">
+        <h2>Tu pedido</h2>
+        <div class="muted" style="font-size:13px">Revisa los productos y confirma</div>
+        <div class="cart-list" id="cart-list"></div>
+        <div class="total-row">
+          <div>Total</div>
+          <div id="total">$0.00</div>
+        </div>
+        <button class="place-order" id="place-order">Enviar pedido</button>
+        <div style="font-size:12px;color:var(--muted);margin-top:8px">Al enviar, el pedido se registrará en el sistema (demo).</div>
+      </aside>
+    </main>
+  </div>
+  <div class="toast" id="toast">Pedido agregado</div>
+  <div class="modal-backdrop" id="modal">
+    <div class="modal">
+      <h3>Resumen del pedido</h3>
+      <div id="order-preview" class="muted" style="margin:10px 0 14px 0"></div>
+      <label style="display:block;font-size:13px;margin-bottom:6px">Nombre o mesa (opcional)</label>
+      <input id="client-name" placeholder="Ej: Mesa 5 o Juan" style="width:100%; padding:8px; border-radius:8px; border:1px solid rgba(35,48,67,0.07)" />
+      <div style="display:flex;gap:8px;margin-top:12px;justify-content:flex-end">
+        <button id="cancel-send" style="padding:8px 10px;border-radius:8px;border:0;cursor:pointer;background:#f1f3f5">Cancelar</button>
+        <button id="confirm-send" style="padding:8px 10px;border-radius:8px;border:0;cursor:pointer;background:var(--accent-dark);color:#fff">Confirmar y enviar</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    const productsEl = document.getElementById('products');
+    const cartList = document.getElementById('cart-list');
+    const totalEl = document.getElementById('total');
+    const toast = document.getElementById('toast');
+    const modal = document.getElementById('modal');
+    const orderPreview = document.getElementById('order-preview');
+    const clientNameInput = document.getElementById('client-name');
+    let cart = {};
+    productsEl.querySelectorAll('.card').forEach(card => {
+      const btn = card.querySelector('.add-btn');
+      btn.addEventListener('click', () => {
+        const id = card.dataset.id;
+        const name = card.dataset.name;
+        const price = parseFloat(card.dataset.price);
+        addToCart({id, name, price});
+      });
+    });
+    function addToCart(item){
+      if(cart[item.id]) cart[item.id].qty += 1;
+      else cart[item.id] = {...item, qty:1};
+      renderCart();
+      showToast('Producto agregado');
+    }
+    function renderCart(){
+      cartList.innerHTML = '';
+      let total = 0;
+      const keys = Object.keys(cart);
+      if(keys.length === 0){
+        cartList.innerHTML = '<div class="muted">Tu carrito está vacío</div>';
+      } else {
+        keys.forEach(k => {
+          const it = cart[k];
+          total += it.price * it.qty;
+          const div = document.createElement('div');
+          div.className = 'cart-item';
+          div.innerHTML = `
+            <div style="flex:1">
+              <div style="font-weight:600">${it.name}</div>
+              <div class="muted" style="font-size:13px">$${it.price.toFixed(2)} c/u</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px">
+              <div class="qty">
+                <button data-action="dec" data-id="${it.id}">-</button>
+                <div style="min-width:26px;text-align:center">${it.qty}</div>
+                <button data-action="inc" data-id="${it.id}">+</button>
+              </div>
+              <div style="min-width:62px;text-align:right;font-weight:600">$${(it.price*it.qty).toFixed(2)}</div>
+            </div>
+          `;
+          cartList.appendChild(div);
+        });
+      }
+      totalEl.textContent = '$' + total.toFixed(2);
+      cartList.querySelectorAll('button[data-action]').forEach(b=>{
+        b.addEventListener('click', e=>{
+          const id = b.dataset.id;
+          const action = b.dataset.action;
+          if(action === 'inc') cart[id].qty += 1;
+          else {
+            cart[id].qty -= 1;
+            if(cart[id].qty <= 0) delete cart[id];
+          }
+          renderCart();
+        });
+      });
+    }
+    function showToast(msg){
+      toast.textContent = msg;
+      toast.style.display = 'block';
+      toast.style.opacity = 1;
+      setTimeout(()=>{ toast.style.opacity = 0; setTimeout(()=>toast.style.display='none',300) }, 1400);
+    }
+    document.getElementById('place-order').addEventListener('click', ()=>{
+      const items = Object.values(cart);
+      if(items.length === 0){
+        showToast('El carrito está vacío');
+        return;
+      }
+      let html = '<div style="max-height:150px; overflow:auto">';
+      items.forEach(it=>{
+        html += `<div style="display:flex;justify-content:space-between;margin-bottom:6px">
+          <div>${it.qty} x ${it.name}</div>
+          <div>$${(it.price*it.qty).toFixed(2)}</div>
+        </div>`;
+      });
+      html += '</div>';
+      html += `<div style="margin-top:8px;font-weight:600">Total: ${totalEl.textContent}</div>`;
+      orderPreview.innerHTML = html;
+      clientNameInput.value = '';
+      modal.style.display = 'flex';
+    });
+    document.getElementById('cancel-send').addEventListener('click', ()=> modal.style.display='none');
+    document.getElementById('confirm-send').addEventListener('click', ()=> {
+      const client = clientNameInput.value.trim() || 'Sin especificar';
+      const order = {
+        client,
+        items: Object.values(cart).map(it=>({id:it.id, name:it.name, price:it.price, qty:it.qty})),
+        total: totalEl.textContent.replace('$',''),
+        created_at: new Date().toISOString()
+      };
+      modal.style.display = 'none';
+      showToast('Pedido enviado al sistema');
+      cart = {};
+      renderCart();
+      try {
+        navigator.clipboard.writeText(JSON.stringify(order, null, 2));
+        showToast('Resumen copiado al portapapeles');
+      } catch(e){}
+    });
+    document.getElementById('open-sample').addEventListener('click', ()=>{
+      showToast('Demo: añade productos y presiona "Enviar pedido"');
+    });
+    document.getElementById('search').addEventListener('input', (e)=>{
+      const q = e.target.value.toLowerCase();
+      const cards = productsEl.querySelectorAll('.card');
+      let count = 0;
+      cards.forEach(c=>{
+        const name = c.dataset.name.toLowerCase();
+        if(name.includes(q)){ c.style.display = ''; count++; } else c.style.display = 'none';
+      });
+      document.getElementById('count').textContent = count + ' productos';
+    });
+    renderCart();
+  </script>
+</body>
+</html>

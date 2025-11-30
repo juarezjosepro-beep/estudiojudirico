@@ -1,0 +1,310 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.6;
+  background: #f8f9fa;
+  color: #333;
+}
+
+/* Header */
+.header {
+  background: #ffffff;
+  color: white;
+  padding: 15px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-container {
+  width: 90%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+
+.nav {
+  display: flex;
+  gap: 20px;
+}
+
+.nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav a:hover {
+  color: #ffcc00;
+}
+
+/* Botón hamburguesa */
+.nav-toggle {
+  display: none;
+  font-size: 1.8rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  height: 70vh;
+  background: url("hero-bg.jpg") center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  padding: 20px;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55); /* oscurece la imagen */
+}
+
+.hero-text {
+  position: relative;
+  max-width: 800px;
+  z-index: 1;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-size: 1.3rem;
+  margin-bottom: 25px;
+}
+
+.btn {
+  background: #0077cc;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background: #005fa3;
+}
+
+/* Botones debajo del Hero */
+.hero-buttons {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  position: relative;
+  z-index: 1;
+}
+
+.btn-secondary {
+  padding: 12px 25px;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 30px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(6px);
+}
+
+.btn-secondary:hover {
+  background: #fff;
+  color: #0077cc;
+  transform: translateY(-3px);
+}
+
+/* Secciones */
+.section {
+  padding: 70px 20px;
+  text-align: center;
+}
+
+.section h2 {
+  margin-bottom: 20px;
+  font-size: 2.2rem;
+  color: #001f3f;
+}
+
+.section p {
+  max-width: 800px;
+  margin: auto;
+  font-size: 1rem;
+  color: #555;
+}
+
+.bg-light {
+  background: #fff;
+}
+
+/* Cards */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  padding: 20px;
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* Cards con imagen */
+.img-card {
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.img-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+.btn-card {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 119, 204, 0.9);
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  padding: 12px;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+
+.btn-card:hover {
+  background: rgba(0, 95, 163, 0.95);
+}
+
+/* Equipo */
+.team-card img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+/* Contacto */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 600px;
+  margin: auto;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.contact-form button {
+  background: #0077cc;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s;
+}
+
+.contact-form button:hover {
+  background: #005fa3;
+}
+
+/* Footer */
+.footer {
+  background: #001f3f;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+/* 🔹 Responsive */
+@media (max-width: 768px) {
+  .nav {
+    display: none;
+    flex-direction: column;
+    background: #001f3f;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  .nav.nav-open {
+    display: flex;
+  }
+  .nav-toggle {
+    display: block;
+  }
+  .hero h1 {
+    font-size: 2rem;
+  }
+  .hero p {
+    font-size: 1rem;
+  }
+  .hero-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .btn-secondary {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+
+
+
+
+/* 🔹 Solo el logo */
+.logo img {
+  height: 150px;   /* 👈 aquí decides qué tan grande se ve */
+  width: auto;    /* mantiene proporción */
+  display: block;
+}
+
+

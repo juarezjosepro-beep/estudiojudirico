@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Web Básica con Bootstrap 3</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+
+<body>
+
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Proyecto Autogestión</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Inicio</a></li>
+        <li><a href="#">Nosotros</a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Servicios <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Servicio 1</a></li>
+            <li><a href="#">Servicio 2</a></li>
+            <li><a href="#">Servicio 3</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Contacto</a></li>
+      </ul>
+
+      <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Buscador">
+        </div>
+        <button type="submit" class="btn btn-default">Buscar</button>
+      </form>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Usuario</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Mi cuenta</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="jumbotron text-center">
+    <div class="container">
+      <h1>Web Básica con Bootstrap 3</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Repellendus dolorem ad officiis nihil delectus quidem animi rerum, molestias sint natus ducimus quod, unde molestiae dolores laboriosam error facilis odio doloremque.</p>
+      <p><a class="btn btn-primary btn-lg" href="#" role="button">Leer mas</a></p>
+    </div>
+  </div>
+
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-sm-4">
+        <h3>Titulo del articulo 1</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat distinctio illo rerum atque ducimus, laboriosam debitis eum deserunt ab libero quis voluptas, illum, perferendis numquam aut aliquam itaque qui magnam!</p>
+        <p><a class="btn btn-success" href="#">Leer mas</a></p>
+        <img src="cibertec_01.jpg" class="img-responsive" alt="Artículo 1">
+        <p>Lorem ipsum...</p>
+      </div>
+
+      <div class="col-sm-4">
+        <h3>Titulo del articulo 2</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat distinctio illo rerum atque ducimus, laboriosam debitis eum deserunt ab libero quis voluptas, illum, perferendis numquam aut aliquam itaque qui magnam!</p>
+        <p><a class="btn btn-success" href="#">Leer mas</a></p>
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+        </div>
+        <p>Lorem ipsum...</p>
+      </div>
+
+      <div class="col-sm-4">
+        <h3>Titulo del articulo 3</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat distinctio illo rerum atque ducimus, laboriosam debitis eum deserunt ab libero quis voluptas, illum, perferendis numquam aut aliquam itaque qui magnam!</p>
+        <p><a class="btn btn-success" href="#">Leer mas</a></p>
+        <img src="cibertec_02.jpg" class="img-responsive" alt="Artículo 3">
+        <p>Lorem ipsum...</p>
+      </div>
+    </div>
+  </div>
+
+  <footer class="text-center" style="margin-top:40px; background-color:#2f2f2f; color:white; padding:20px;">
+    <p>Arquitectura de Entornos Web</p>
+    <p>Todos los Derechos Reservados © Trujillo-2025</p>
+  </footer>
+
+</body>
+</html>
